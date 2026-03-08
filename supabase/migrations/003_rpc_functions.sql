@@ -18,6 +18,7 @@ LANGUAGE sql SECURITY DEFINER AS $$
   FROM items i
   JOIN sites s ON s.id = i.site_id
   JOIN subscriptions sub ON sub.site_id = i.site_id
+    AND (sub.category IS NULL OR sub.category = s.category)
     AND sub.is_muted = false
   JOIN fcm_tokens ft ON ft.id = sub.token_id
     AND ft.is_active = true

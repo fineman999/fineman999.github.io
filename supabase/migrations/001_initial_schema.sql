@@ -89,3 +89,13 @@ CREATE TABLE user_interactions (
 );
 CREATE INDEX idx_user_interactions_token_item ON user_interactions(token_id, item_id);
 CREATE INDEX idx_user_interactions_bookmark ON user_interactions(token_id, action) WHERE action = 'bookmark';
+
+-- Prevent duplicate notifications (race condition guard)
+ALTER TABLE notification_log ADD CONSTRAINT uq_notification_log_item_token UNIQUE (item_id, token_id);
+
+-- Enforce valid status values
+ALTER TABLE notification_log ADD CONSTRAINT chk_notification_status
+  CHECK (status IN ('pending', 'sent', 'failed'));
+
+ALTER TABLE scrape_runs ADD CONSTRAINT chk_scrape_status
+  CHECK (status IN ('running', 'success', 'failed'));
