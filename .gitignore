@@ -4,14 +4,26 @@ __pycache__/
 .env
 .venv/
 venv/
+.pytest_cache/
+.coverage
+coverage/
+htmlcov/
+build/
+*.egg-info/
+.eggs/
+.mypy_cache/
+.ruff_cache/
 
 # Node
 node_modules/
 dist/
 .env.local
 .env.*.local
+frontend/.vite/
 
 # IDE
 .idea/
 *.iml
 .DS_Store
+*.log
+Thumbs.db
