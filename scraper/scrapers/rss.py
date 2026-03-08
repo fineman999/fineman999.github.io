@@ -6,7 +6,10 @@ from scrapers.base import BaseScraper
 class RssScraper(BaseScraper):
     def scrape(self, site: dict) -> list[dict]:
         feed_url = site["selector"].get("url", site["url"])
-        feed = feedparser.parse(feed_url)
+        feed = feedparser.parse(
+            feed_url,
+            agent="Mozilla/5.0 (compatible; NewsAggregator/1.0)"
+        )
         items = []
         for entry in feed.get("entries", []):
             published_at = None

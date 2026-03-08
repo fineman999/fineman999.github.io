@@ -47,7 +47,7 @@ def test_rss_scraper_handles_missing_published():
 def test_rss_scraper_uses_selector_url():
     """Should fetch from selector.url, not site.url"""
     captured = {}
-    def fake_parse(url):
+    def fake_parse(url, agent=None):
         captured["url"] = url
         return {"entries": []}
     scraper = RssScraper()
